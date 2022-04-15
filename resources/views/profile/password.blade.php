@@ -12,7 +12,7 @@
         <div class="row mt-sm-4">
             <div class="col-12 col-md-12 col-lg-6">
                 <div class="card">
-                    <form method="POST" class="needs-validation" action="{{ route('password.update')}}" novalidate="">
+                    <form method="POST" class="needs-validation" action="{{ route('change.password')}}" novalidate="">
                         @csrf
                         <div class="card-header">
                             <h4>Update Password</h4>
@@ -26,6 +26,7 @@
                                     <div class="invalid-feedback">
                                         Please give your old password
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('old_password') }}</span>
                                 </div>
                                 <div class="form-group col-md-12 col-12">
                                     <label for="password">New Password</label>
@@ -34,6 +35,7 @@
                                     <div class="invalid-feedback">
                                         Please fill in the new password
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
                                 </div>
 
                                 <div class="form-group col-md-12 col-12">
@@ -43,6 +45,7 @@
                                     <div class="invalid-feedback">
                                         Please fill in the confirm password
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                 </div>
                             </div>
                         </div>

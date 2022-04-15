@@ -14,3 +14,17 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.trash_btn', function () {
+                if (confirm("Are You Sure?")) {
+                    let selector = $(this).closest('td').find('.trash_form');
+                    selector.submit();
+                }
+            });
+        });
+
+    </script>
+@endpush

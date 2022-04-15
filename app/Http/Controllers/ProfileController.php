@@ -13,6 +13,7 @@ class ProfileController extends Controller
 {
     use ImageStore;
 
+    //show profile UI
     public function profile()
     {
         try {
@@ -23,6 +24,7 @@ class ProfileController extends Controller
         }
     }
 
+    //show password UI
     public function password()
     {
         try {
@@ -33,17 +35,18 @@ class ProfileController extends Controller
         }
     }
 
+    //change user profile
     public function profileUpdate(Request $request): \Illuminate\Http\RedirectResponse
     {
-        try {
-            $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|email',
-                'username' => 'required',
-                'phone' => 'required',
-            ]);
+        $user = auth()->user();
 
-            $user = auth()->user();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'username' => 'required|unique:users,username,'.$user->id,
+            'phone' => 'required|unique:users,phone,'.$user->id,
+        ]);
+        try {
             $user->name = $request->name;
             $user->username = $request->username;
             $user->phone = $request->phone;
@@ -59,14 +62,15 @@ class ProfileController extends Controller
         }
     }
 
+    //change user password
     public function updatePassword(Request $request): \Illuminate\Http\RedirectResponse
     {
-        try {
-            $this->validate($request, [
-                'old_password' => 'required',
-                'password' => 'required|confirmed|min:8',
-            ]);
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:8',
+        ]);
 
+        try {
             $hashedPassword = Auth::user()->password;
             if (Hash::check($request->old_password, $hashedPassword)) {
                 if (!Hash::check($request->password, $hashedPassword)) {

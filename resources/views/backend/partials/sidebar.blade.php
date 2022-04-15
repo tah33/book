@@ -8,9 +8,8 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li><a class="nav-link" href="{{ route('home') }}"><i class="far fa-fire"></i> <span>Dashboard</span></a></li>
-
-            <li class="menu-header">Customers</li>
+            <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('dashboard') }}"><i class="fa fa-fire"></i> <span>Dashboard</span></a></li>
+            <li class="menu-header">Category</li>
             {{--<li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-ellipsis-h"></i> <span>Utilities</span></a>
                 <ul class="dropdown-menu">
@@ -19,6 +18,9 @@
                     <li><a href="utilities-subscribe.html">Subscribe</a></li>
                 </ul>
             </li>--}}
+            <li class="{{ request()->is('categories') ? 'active' : '' }}"><a class="nav-link" href="{{ route('category.index') }}"><i class="fa fa-bars"></i> <span>Category</span></a></li>
+            <li class="menu-header">Author</li>
+            <li class="{{ request()->is('authors') ? 'active' : '' }}"><a class="nav-link" href="{{ route('author.index') }}"><i class="fa fa-user"></i> <span>Author</span></a></li>
 
         </ul>
 

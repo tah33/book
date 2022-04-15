@@ -40,6 +40,7 @@
                                     <div class="invalid-feedback">
                                         Please fill in the name
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
                                 </div>
                                 <div class="form-group col-md-6 col-12">
                                     <label>Username</label>
@@ -48,6 +49,7 @@
                                     <div class="invalid-feedback">
                                         Please fill in the username
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('username') }}</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -58,11 +60,13 @@
                                     <div class="invalid-feedback">
                                         Please fill in the email
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
                                 </div>
                                 <div class="form-group col-md-6 col-12">
                                     <label>Phone</label>
                                     <input type="tel" class="form-control" name="phone"
                                            value="{{ Auth::user()->phone }}">
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
                                 </div>
                                 <div class="form-group col-md-6 col-12">
                                     <label>Image</label>

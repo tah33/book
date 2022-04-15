@@ -7,12 +7,12 @@
     <title>Laravel</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="{{ asset('assets/backend/fonts/css2.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/font_awesome/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/backend/css/jqvmap.min.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('assets/backend/css/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/summernote-bs4.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/backend/css/components.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/components.css')}}">--}}
     <link rel="stylesheet" href="{{ asset('assets/backend/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     @stack('css')
@@ -25,12 +25,14 @@
 <script src="{{asset('assets/backend/js/tooltip.js')}}"></script>
 <script src="{{asset('assets/backend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/jquery.nicescroll.min.js')}}"></script>
+{{--
 <script src="{{asset('assets/backend/js/moment.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>--}}
 <script src="{{asset('assets/backend/js/stisla.js')}}"></script>
-<script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
 <script src="{{asset('assets/backend/js/scripts.js')}}"></script>
+<script src="{{asset('assets/backend/js/toastr.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/custom.js')}}"></script>
-<script src="{{ asset('assets/backend/js/toastr.min.js') }}"></script>
+@stack('js')
 {!! Toastr::message() !!}
 </body>
 </html>

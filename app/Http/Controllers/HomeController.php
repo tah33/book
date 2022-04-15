@@ -6,19 +6,24 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __construct()
+    public function home()
     {
-        $this->middleware('auth');
+        $data = [
+            'departments' => ['cse','bba','eee']
+        ];
+        return view('frontend.home',$data);
     }
 
-    public function index()
+    public function dashboard()
     {
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1)
+        {
             return view('backend.home');
         }
-        if (auth()->user()->role_id == 2) {
-            return view('pharmacist.home');
+        elseif(auth()->user()->role_id == 2)
+        {
+            return view('frontend.home');
         }
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }
