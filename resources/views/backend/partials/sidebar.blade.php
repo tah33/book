@@ -21,6 +21,10 @@
             <li class="{{ request()->is('categories') ? 'active' : '' }}"><a class="nav-link" href="{{ route('category.index') }}"><i class="fa fa-bars"></i> <span>Category</span></a></li>
             <li class="menu-header">Author</li>
             <li class="{{ request()->is('authors') ? 'active' : '' }}"><a class="nav-link" href="{{ route('author.index') }}"><i class="fa fa-user"></i> <span>Author</span></a></li>
+            <li class="menu-header">Book</li>
+            <li class="{{ request()->is('books') ? 'active' : '' }}"><a class="nav-link" href="{{ route('book.index') }}"><i class="fa fa-book"></i> <span>Book</span></a></li>
+            <li class="menu-header">Order</li>
+            <li class="{{ request()->is('orders') ? 'active' : '' }}"><a class="nav-link" href="{{ route('order.index') }}"><i class="fa fa-book"></i> <span>Order</span></a></li>
 
         </ul>
 

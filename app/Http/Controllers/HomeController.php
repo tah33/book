@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        $data = [
-            'departments' => ['cse','bba','eee']
-        ];
-        return view('frontend.home',$data);
+        try {
+            $data = [
+                'departments' => ['cse', 'bba', 'eee']
+            ];
+            return view('frontend.home', $data);
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     public function dashboard()
@@ -25,5 +30,16 @@ class HomeController extends Controller
             return view('frontend.home');
         }
         return redirect()->route('home');
+    }
+
+    public function statusUpdate($table,$id): \Illuminate\Http\RedirectResponse
+    {
+        try {
+            DB::table($table)->where('id',$id)->update(['status' => 1]);
+            return back();
+        } catch (\Exception $e) {
+            Toastr::error('Something Went Wrong','error');
+            return back();
+        }
     }
 }

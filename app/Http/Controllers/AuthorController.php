@@ -20,7 +20,7 @@ class AuthorController extends Controller
             ];
             return view('backend.author.index', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -39,10 +39,10 @@ class AuthorController extends Controller
                 'status' => $request->status,
                 'image' => $image,
             ]);
-            Toastr::success('Author Created Successfully :)', 'success');
+            Toastr::success('Author Created Successfully :)', 'Success!!');
             return redirect()->route('author.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -57,7 +57,7 @@ class AuthorController extends Controller
             ];
             return view('backend.author.index', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -77,10 +77,10 @@ class AuthorController extends Controller
                 'status' => $request->status,
                 'image' => $image,
             ]);
-            Toastr::success('Author Updated Successfully :)', 'success');
+            Toastr::success('Author Updated Successfully :)', 'Success!!');
             return redirect()->route('author.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -92,10 +92,10 @@ class AuthorController extends Controller
             $author = Author::find($id);
             $this->deleteImage($author->image);
             $author->delete();
-            Toastr::success('Author Deleted Successfully :)', 'success');
+            Toastr::success('Author Deleted Successfully :)', 'Success!!');
             return redirect()->route('author.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }

@@ -15,7 +15,7 @@
                 <tr>
                     <th scope="row">{{ $key+1 }}</th>
                     <td><img src="{{ asset($item->image) }}" width="60" alt="{{ $item->title }}"></td>
-                    <td>{{ $item->title }}</td>
+                    <td>{{ $item->name }}</td>
                     <td>
                         @if($item->status == 1)
                             <div class="badge badge-success">Active</div>

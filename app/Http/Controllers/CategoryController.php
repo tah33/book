@@ -20,7 +20,7 @@ class CategoryController extends Controller
             ];
             return view('backend.category.index', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -39,10 +39,10 @@ class CategoryController extends Controller
                 'status' => $request->status,
                 'image' => $image,
             ]);
-            Toastr::success('Category Created Successfully :)', 'success');
+            Toastr::success('Category Created Successfully :)', 'Success!!');
             return redirect()->route('category.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -57,7 +57,7 @@ class CategoryController extends Controller
             ];
             return view('backend.category.index', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -77,10 +77,10 @@ class CategoryController extends Controller
                 'status' => $request->status,
                 'image' => $image,
             ]);
-            Toastr::success('Category Updated Successfully :)', 'success');
+            Toastr::success('Category Updated Successfully :)', 'Success!!');
             return redirect()->route('category.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
@@ -92,10 +92,10 @@ class CategoryController extends Controller
             $category = Category::find($id);
             $this->deleteImage($category->image);
             $category->delete();
-            Toastr::success('Category Deleted Successfully :)', 'success');
+            Toastr::success('Category Deleted Successfully :)', 'Success!!');
             return redirect()->route('category.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','error');
+            Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
     }
