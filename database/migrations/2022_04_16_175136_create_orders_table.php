@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('invoice_no');
             $table->string('payment_type')->nullable();
             $table->string('payment_status')->default(false)->comment('0 => unpaid,1=>paid');
+            $table->integer('total_quantity')->default(0);
             $table->double('sub_total')->default(0);
             $table->double('total_discount')->default(0);
             $table->double('total_tax')->default(0);

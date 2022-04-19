@@ -1,0 +1,94 @@
+*{
+    text-decoration: none !important;
+    outline: none !important;
+    outline: 0 !important;
+}
+body{
+    background: #eee;
+}
+.container{
+    max-width: 1800px;
+}
+
+.topbar_sec{
+    background: #727088!important;
+    padding: 10px;
+}
+.bar_color{
+    font-size: 30px;
+    color: white;
+}
+.bar_color:focus,
+.bar_color:hover
+{
+    color: white;
+}
+.login_btn{
+    display: inline-block;
+    background: white;
+    color: red;
+    border-radius: 5px;
+    padding: 13px 25px;
+    font-size: 15px;
+    border: 1px solid transparent;
+    transition: 0.2s all linear;
+}
+.login_btn:hover{
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+}
+.search_btn{
+    width: 800px;
+    margin: auto;
+}
+.search_btn input{
+    padding: 25px;
+    font-size: 15px;
+}
+.search_btn .input-group-text{
+    background: red;
+    border: red;
+    padding: 15px 30px;
+    color: white;
+}
+.book_section h1{
+    font-size: 24px;
+    color: #727088;
+    border-bottom: 1px solid #eeee;
+    padding-bottom: 15px;
+}
+.book_section{
+    margin-top: 30px;
+}
+.book_section .container{
+    background: white;
+    padding: 10px 40px 40px 40px;
+}
+.book_section .card-title{
+    color: #727088 !important;
+    font-size: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
+    overflow: hidden;
+}
+.card-title a{
+    color: #727088 !important;
+}.card-title a:hover{
+    color: red !important;
+}
+.symbol{
+    font-size: 20px;
+    font-weight: 800;
+}
+.book_section .card-text{
+    color: #727088;
+}
+.image_title{
+    color: #727088;
+    display: block;
+}
+.image_title:hover{
+    color: red;
+}

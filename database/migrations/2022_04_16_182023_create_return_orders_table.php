@@ -18,7 +18,8 @@ class CreateReturnOrdersTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('order_id')->nullable()->constrained()->nullOnDelete();
             $table->string('reason')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(false);
+            $table->boolean('is_reject')->default(false);
             $table->timestamps();
         });
     }

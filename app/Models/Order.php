@@ -26,4 +26,14 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function returnOrder()
+    {
+        return $this->hasMany(ReturnOrder::class);
+    }
+
+    public function getReturnedAttribute()
+    {
+        return $this->returnOrder()->where('is_reject',0)->where('status',1)->first();
+    }
 }

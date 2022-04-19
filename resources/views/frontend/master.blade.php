@@ -6,14 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Online Advising</title>
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/frontend/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/frontend/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendors/font_awesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}">
     <link rel="shortcut icon" href="{{ asset('assets/frontend/images/favicon.png') }}"/>
 </head>
 <body>
 @yield('section')
-
 <script src="{{asset('assets/backend/js/jquery-3.5.1.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/bootstrap.min.js')}}"></script>
 </body>

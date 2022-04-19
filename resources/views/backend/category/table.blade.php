@@ -30,10 +30,18 @@
                                 Action
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+                                @if($item->status == 0)
+                                    <a class="dropdown-item has-icon"
+                                       href="{{ route('status.update',['table' => 'categories','id' => $item->id]) }}"><i
+                                            class="fas fa-check"></i> Active</a>
+                                @else
+                                    <a class="dropdown-item has-icon"
+                                       href="{{ route('status.inactive',['table' => 'categories','id' => $item->id]) }}"><i
+                                            class="fas fa-times"></i> Inactive</a>
+                                @endif
                                 <a class="dropdown-item has-icon"
                                    href="{{ route('category.edit',$item->id) }}"><i
                                         class="fas fa-pencil-alt"></i> Edit</a>
-
                                 <a class="dropdown-item has-icon trash_btn" href="#"><i
                                         class="fas fa-trash"></i> Delete</a>
                             </div>

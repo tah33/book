@@ -30,6 +30,15 @@
                                 Action
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+                                @if($item->status == 0)
+                                    <a class="dropdown-item has-icon"
+                                       href="{{ route('status.update',['table' => 'authors','id' => $item->id]) }}"><i
+                                            class="fas fa-check"></i> Active</a>
+                                @else
+                                    <a class="dropdown-item has-icon"
+                                       href="{{ route('status.inactive',['table' => 'authors','id' => $item->id]) }}"><i
+                                            class="fas fa-times"></i> Inactive</a>
+                                @endif
                                 <a class="dropdown-item has-icon"
                                    href="{{ route('author.edit',$item->id) }}"><i
                                         class="fas fa-pencil-alt"></i> Edit</a>

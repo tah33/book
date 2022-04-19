@@ -3,21 +3,26 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReturnOrderController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
+//Admin Panel
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
     Route::post('profile-update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
     Route::get('change-password', [ProfileController::class, 'password'])->name('password');
     Route::post('password-update', [ProfileController::class, 'updatePassword'])->name('change.password');
 
-    Route::get('status-active/{table}/{id}',[\App\Http\Controllers\HomeController::class,'statusUpdate'])->name('status.update');
+    Route::get('status-active/{table}/{id}',[HomeController::class,'statusUpdate'])->name('status.update');
+    Route::get('status-inactive/{table}/{id}',[HomeController::class,'statusInactive'])->name('status.inactive');
 
     //Category list functions
     Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
@@ -58,10 +63,28 @@ Route::group(['middleware' => ['auth']], function () {
 
     //order list
     Route::get('order-list', [OrderController::class, 'index'])->name('order.index');
-    //order status change
+    //order invoice view
     Route::get('order-view/{id}', [OrderController::class, 'show'])->name('order.show');
     //order status change
     Route::get('order-status-change/{id}', [OrderController::class, 'statusChange'])->name('status.change');
+
+    //order list
+    Route::get('return-order-list', [ReturnOrderController::class, 'index'])->name('return.index');
+    //request return order
+    Route::post('request-return', [ReturnOrderController::class, 'requestStore'])->name('request.return');
+    //reject return order
+    Route::get('reject-return/{id}', [ReturnOrderController::class, 'reject'])->name('reject.return');
+
+    //setting view
+    Route::get('settings', [SettingController::class, 'index'])->name('settings');
+    //store settings data
+    Route::post('store-settings', [SettingController::class, 'store'])->name('setting.store');
+
+    //sales report data
+    Route::get('sales-report', [\App\Http\Controllers\ReportController::class, 'salesReport'])->name('sales.report');
+
+    //customer list
+    Route::get('customers', [\App\Http\Controllers\HomeController::class, 'customer'])->name('customer.index');
 });
 
 

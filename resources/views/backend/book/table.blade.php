@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Purchase</h4>
+        <h4>Book</h4>
         <div class="card-header-form">
             <a href="{{ route('book.create') }}" class="btn btn-primary float-right"><i
                     class="fa fa-plus"></i> Add New Book </a>
@@ -45,14 +45,19 @@
                                 Action
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                                <a class="dropdown-item has-icon"
-                                   href="#" data-toggle="modal" data-target="#stock_modify_{{ $item->id }}"><i
-                                        class="fas fa-book"></i> Modify Stock</a>
                                 @if($item->status == 0)
                                     <a class="dropdown-item has-icon"
                                        href="{{ route('status.update',['table' => 'books','id' => $item->id]) }}"><i
                                             class="fas fa-check"></i> Publish</a>
+                                @else
+                                    <a class="dropdown-item has-icon"
+                                       href="{{ route('status.inactive',['table' => 'books','id' => $item->id]) }}"><i
+                                            class="fas fa-times"></i> Unpublish</a>
                                 @endif
+
+                                <a class="dropdown-item has-icon"
+                                   href="#" data-toggle="modal" data-target="#stock_modify_{{ $item->id }}"><i
+                                        class="fas fa-book"></i> Modify Stock</a>
                                 <a class="dropdown-item has-icon"
                                    href="{{ route('book.edit',$item->id) }}"><i
                                         class="fas fa-pencil-alt"></i> Edit</a>
