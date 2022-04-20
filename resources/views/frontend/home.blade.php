@@ -1,252 +1,88 @@
 @extends('frontend.master')
 @section('section')
-    <div class="container-fluid topbar_sec">
-        <div class="container">
-            {{--            Topbar--}}
-            <div class="row">
-                <div class="col-lg-2 d-flex justify-content-between">
-                    <a class="bar_color" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
-                    <a href="javascript:void(0)"><img src="https://eboighar.com/frontend/assets/images/logo.svg"
-                                                      alt="logo" width="200"></a>
-                </div>
-                <div class="col-lg-8 d-flex justify-content-center">
-                    <div class="input-group search_btn">
-                        <input type="text" class="form-control"
-                               placeholder="Enter Book Name/Author Name to Search Books"
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button type="submit" class="input-group-text" id="basic-addon2"><i
-                                    class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 d-flex justify-content-end">
-                    <a href="#" class="login_btn mr-3">Login/Sign Up</a>
-                    <a href="#" class="bar_color d-inline-block mt-1"><i class="fa fa-shopping-cart"></i></a>
-                </div>
-            </div>
-            {{--            Latest Products--}}
-        </div>
-    </div>
     <div class="container-fluid book_section">
         <div class="container">
-            <h1 class="mt-2 mb-4">Latest Books</h1>
-            <div class="card-deck">
-                <div class="row">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+                <h1 class="border-0">Latest Books</h1>
+                <a class="all_books" href="{{ route('all.books') }}">All Books <i class="fa fa-arrow-right"></i></a>
+            </div>
+            <div class="row">
+                @foreach($books as $book)
                     <div class="col-lg-2 mb-3">
                         <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250" src="{{ asset('assets/frontend/images/book1.jpg') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">English Grammar</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250" src="{{ asset('assets/frontend/images/book2.jpg') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">Bangla Bekoron</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250" src="{{ asset('assets/frontend/images/book3.jpg') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">Learn Math in 30 Days</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250" src="{{ asset('assets/frontend/images/book4.jpg') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">Learn English in 30 Days</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
+                            <a href="{{ route('books.details',$book->id) }}">
                                 <img class="card-img-top" height="250"
-                                     src="{{ asset('assets/frontend/images/book5.jpg') }}"
+                                     src="{{ asset($book->image) }}"
                                      alt="Card image cap">
                             </a>
                             <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">Learn Grammar in 30 Days</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
+                                <h5 class="card-title"><a href="{{ route('books.details',$book->id) }}">{{ $book->title }}</a></h5>
+                                <p class="card-text"><span class="symbol">৳</span> {{ round($book->price,2) }} </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250"
-                                     src="{{ asset('assets/frontend/images/book6.png') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">Learn Freelancing in 30 Days</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250"
-                                     src="{{ asset('assets/frontend/images/book7.jpg') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">The Caring Wife</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <a href="">
-                                <img class="card-img-top" height="250"
-                                     src="{{ asset('assets/frontend/images/book1.jpg') }}"
-                                     alt="Card image cap">
-                            </a>
-                            <div class="card-body text-left">
-                                <h5 class="card-title"><a href="#">Harpers Illustrated Biochemistry</a></h5>
-                                <p class="card-text"><span class="symbol">৳</span> {{ round(499.99,2) }} </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+
+    {{--    //category section()--}}
     <div class="container-fluid book_section">
         <div class="container">
             <h1 class="mt-2 mb-4">Latest Categories</h1>
             <div class="card-deck">
                 <div class="row text-center">
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
+                    @foreach($categories as $category)
+                        <div class="col-lg-2 mb-3">
+                            <a href="{{ route('category.books',$category->id) }}"><img
+                                    src="{{ asset($category->image) }}" alt="{{ $category->title }}" width="200"
+                                    height="150"></a>
+                            <a class="image_title"
+                               href="{{ route('category.books',$category->id) }}">{{ $category->title }}</a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
+
+    {{--    author section--}}
     <div class="container-fluid book_section">
         <div class="container">
             <h1 class="mt-2 mb-4">Popular Authors</h1>
             <div class="card-deck">
                 <div class="row text-center">
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <img class="rounded-circle" src="{{ asset('assets/frontend/images/cat.jpg') }}" alt="cat">
-                        <a class="image_title" href="">Electronics</a>
-                    </div>
+                    @foreach($authors as $author)
+                        <div class="col-lg-2 mb-3">
+                            <a href="{{ route('author.books',$author->id) }}"><img src="{{ asset($author->image) }}"
+                                                                                   alt="{{ $author->name }}" width="200"
+                                                                                   height="150"></a>
+                            <a class="image_title"
+                               href="{{ route('author.books',$author->id) }}">{{ $author->name }}</a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--    about us--}}
+    <div class="container-fluid book_section">
+        <div class="container">
+            <h1 class="mt-2 mb-4">About Us</h1>
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <p class="about_us">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid autem dicta itaque
+                        molestiae nemo neque porro reiciendis sint! Adipisci architecto at blanditiis consequatur,
+                        corporis dicta dolores ducimus ea earum facere labore magni maxime, neque odit quis sapiente,
+                        tempore! Alias at distinctio error explicabo hic, itaque molestias odit officia quam quas? Est
+                        facere odit omnis reiciendis repellat tempora! Ad architecto, commodi corporis dolores eos
+                        fugiat impedit labore officiis sint vel! Consequuntur, cumque eveniet exercitationem fugiat in,
+                        iure laborum modi necessitatibus, possimus quia rerum sint veritatis? Commodi ducimus ipsam
+                        molestiae nihil nulla quia quis voluptatum. Animi deserunt dolorum eveniet reprehenderit
+                        temporibus.
+                    </p>
                 </div>
             </div>
         </div>

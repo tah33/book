@@ -21,8 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('change-password', [ProfileController::class, 'password'])->name('password');
     Route::post('password-update', [ProfileController::class, 'updatePassword'])->name('change.password');
 
-    Route::get('status-active/{table}/{id}',[HomeController::class,'statusUpdate'])->name('status.update');
-    Route::get('status-inactive/{table}/{id}',[HomeController::class,'statusInactive'])->name('status.inactive');
+    Route::get('status-active/{table}/{id}', [HomeController::class, 'statusUpdate'])->name('status.update');
+    Route::get('status-inactive/{table}/{id}', [HomeController::class, 'statusInactive'])->name('status.inactive');
 
     //Category list functions
     Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
@@ -87,5 +87,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('customers', [\App\Http\Controllers\HomeController::class, 'customer'])->name('customer.index');
 });
 
+Route::get('all-books', [HomeController::class, 'allBooks'])->name('all.books');
+Route::get('category-books/{id}', [HomeController::class, 'categoryBooks'])->name('category.books');
+Route::get('author-books/{id}', [HomeController::class, 'authorBooks'])->name('author.books');
+Route::get('book-details/{id}', [HomeController::class, 'bookDetails'])->name('books.details');
+Route::post('search-book', [HomeController::class, 'searchBook'])->name('search.book');
 
 require __DIR__ . '/auth.php';

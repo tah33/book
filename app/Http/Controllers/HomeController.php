@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Setting;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -15,7 +18,9 @@ class HomeController extends Controller
     {
         try {
             $data = [
-                'departments' => ['cse', 'bba', 'eee']
+                'categories' => Category::where('status',1)->latest()->get(),
+                'authors' => Author::where('status',1)->latest()->get(),
+                'books' => Book::where('status',1)->latest()->take(15)->get()
             ];
             return view('frontend.home', $data);
         } catch (\Exception $e) {
@@ -40,7 +45,10 @@ class HomeController extends Controller
                 ];
                 return view('backend.home',$data);
             } elseif (auth()->user()->role_id == 2) {
-                return view('frontend.home');
+                $data = [
+                    'setting' => Setting::first()
+                ];
+                return view('frontend.home',$data);
             }
             return redirect()->route('home');
         } catch (\Exception $e) {
@@ -55,7 +63,6 @@ class HomeController extends Controller
             DB::table($table)->where('id',$id)->update([
                 'status' => 1
             ]);
-
             return back();
         } catch (\Exception $e) {
             Toastr::error('Something Went Wrong','error');
@@ -88,5 +95,50 @@ class HomeController extends Controller
             Toastr::error('Something Went Wrong','Error!!');
             return back();
         }
+    }
+
+    //all books
+    public function allBooks()
+    {
+        $data = [
+            'books' => Book::where('status',1)->latest()->get()
+        ];
+        return view('frontend.all_books',$data);
+    }
+
+    //category wise books
+    public function categoryBooks($id)
+    {
+        $data = [
+            'books' => Book::where('status',1)->where('category_id',$id)->latest()->get()
+        ];
+        return view('frontend.all_books',$data);
+    }
+
+    //author wise books
+    public function authorBooks($id)
+    {
+        $data = [
+            'books' => Book::where('status',1)->where('author_id',$id)->latest()->get()
+        ];
+        return view('frontend.all_books',$data);
+    }
+
+    public function bookDetails($id)
+    {
+        $data = [
+            'book' => Book::find($id)
+        ];
+        return view('frontend.book_details',$data);
+    }
+
+    public function searchBook(Request $request)
+    {
+        $data = [
+            'books' => Book::where('title','like','%'.$request->value.'%')->orWhereHas('author',function ($query) use($request){
+                $query->where('name','like','%'.$request->value.'%');
+            })->get()
+        ];
+        return view('frontend.all_books',$data);
     }
 }

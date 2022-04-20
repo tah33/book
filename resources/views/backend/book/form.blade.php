@@ -64,8 +64,40 @@
                                     <span class="text-danger"> {{ $errors->first('stock') }} </span>
                                 </div>
                                 <div class="form-group col-lg-4">
+                                    <label for="publisher">Publisher <strong class="text-danger">*</strong></label>
+                                    <input type="text" class="form-control" id="publisher" name="publisher"
+                                           placeholder="Publisher"
+                                           value="{{ isset($book) ? $book->publisher : old('publisher') }}">
+                                    <span class="text-danger"> {{ $errors->first('publisher') }} </span>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="country">Country <strong class="text-danger">*</strong></label>
+                                    <input type="text" class="form-control" id="country" name="country"
+                                           placeholder="Country"
+                                           value="{{ isset($book) ? $book->country : old('country') }}">
+                                    <span class="text-danger"> {{ $errors->first('country') }} </span>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="language">Language <strong class="text-danger">*</strong></label>
+                                    <input type="text" class="form-control" id="language" name="language"
+                                           placeholder="Language"
+                                           value="{{ isset($book) ? $book->language : old('language') }}">
+                                    <span class="text-danger"> {{ $errors->first('language') }} </span>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="max_page">Max Page Allow For Read <strong class="text-danger">*</strong></label>
+                                    <input type="number" class="form-control" id="max_page" name="max_page"
+                                           placeholder="e.g.10"
+                                           value="{{ isset($book) ? $book->max_page : old('max_page') }}">
+                                    <span class="text-danger"> {{ $errors->first('max_page') }} </span>
+                                </div>
+                                <div class="form-group col-lg-4">
                                     <label for="image">Image</label>
                                     <input type="file" class="form-control" id="image" name="image">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="pdf">PDF file</label>
+                                    <input type="file" class="form-control" id="pdf" name="pdf">
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label for="status">Status </label>

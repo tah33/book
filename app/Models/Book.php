@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id','author_id','title','price','image','stock','status'];
+    protected $fillable = ['category_id','author_id','title','price','image','stock','status','publisher','country','language','max_page','pdf','demo_pdf'];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

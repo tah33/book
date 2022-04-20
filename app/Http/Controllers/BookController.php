@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Traits\ImageStore;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Imagick;
 
 class BookController extends Controller
 {
@@ -17,11 +18,11 @@ class BookController extends Controller
     {
         try {
             $data = [
-                'books' => Book::with('category','author')->latest()->paginate(15)
+                'books' => Book::with('category', 'author')->latest()->paginate(15)
             ];
             return view('backend.book.index', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error');
+            Toastr::error('Something Went Wrong', 'Error');
             return back();
         }
     }
@@ -30,12 +31,12 @@ class BookController extends Controller
     {
         try {
             $data = [
-                'categories' => Category::where('status',1)->get(),
-                'authors'    => Author::where('status',1)->get(),
+                'categories' => Category::where('status', 1)->get(),
+                'authors' => Author::where('status', 1)->get(),
             ];
             return view('backend.book.form', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error');
+            Toastr::error('Something Went Wrong', 'Error');
             return back();
         }
     }
@@ -52,6 +53,26 @@ class BookController extends Controller
         try {
             $image = $this->saveImage('book-' . uniqid() . '.png', $request->image, 'uploads/image/', $request->image);
 
+            $path = 'uploads/pdf/';
+            $file_name = 'book-' . uniqid() . '.pdf';
+            $request->pdf->move($path, $file_name);
+
+            $im = new imagick($request->pdf);
+            $pages = $im->getNumberImages();
+            if ($pages < 3) {
+                $resolution = 600;
+            } else {
+                $resolution = floor(sqrt(1000000 / $pages));
+            }
+            $imagick = new imagick();
+            $imagick->setResolution($resolution, $resolution);
+            $imagick->readImage($request->pdf);
+            $imagick->setImageFormat('jpg');
+            foreach ($imagick as $i => $imagi) {
+                $imagick->writeImage($request->pdf . " page " . ($i + 1) . " of " . $pages . ".jpg");
+            }
+            $imagick->clear();
+
             Book::create([
                 'title' => $request->title,
                 'price' => $request->price,
@@ -60,31 +81,32 @@ class BookController extends Controller
                 'author_id' => $request->author_id,
                 'status' => $request->status,
                 'image' => $image,
+                'publisher' => $request->publisher,
+                'country' => $request->country,
+                'language' => $request->language,
+                'max_page' => $request->max_page,
+                'demo_pdf' => $request->demo_pdf ?? null,
+                'pdf' => $path . '/' . $file_name,
             ]);
             Toastr::success('Book Created Successfully :)', 'Success!!');
             return redirect()->route('book.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error!!');
+            Toastr::error('Something Went Wrong', 'Error!!');
             return back();
         }
-    }
-
-    public function show(Book $book)
-    {
-        //
     }
 
     public function edit($id)
     {
         try {
             $data = [
-                'categories' => Category::where('status',1)->get(),
-                'authors'    => Author::where('status',1)->get(),
-                'book'    => Book::find($id),
+                'categories' => Category::where('status', 1)->get(),
+                'authors' => Author::where('status', 1)->get(),
+                'book' => Book::find($id),
             ];
             return view('backend.book.form', $data);
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error!!');
+            Toastr::error('Something Went Wrong', 'Error!!');
             return back();
         }
     }
@@ -102,6 +124,11 @@ class BookController extends Controller
             $book = Book::find($id);
             $image = $this->saveImage('book-' . uniqid() . '.png', $request->image, 'uploads/image/', $book->image);
 
+            $path = 'uploads/pdf/';
+            $file_name = 'book-' . uniqid() . '.pdf';
+            $request->pdf->move($path, $file_name);
+
+
             $book->update([
                 'title' => $request->title,
                 'price' => $request->price,
@@ -110,11 +137,17 @@ class BookController extends Controller
                 'author_id' => $request->author_id,
                 'status' => $request->status,
                 'image' => $image,
+                'publisher' => $request->publisher,
+                'country' => $request->country,
+                'language' => $request->language,
+                'max_page' => $request->max_page,
+                'demo_pdf' => $request->demo_pdf ?? null,
+                'pdf' => $path . '/' . $file_name,
             ]);
             Toastr::success('Book Updated Successfully :)', 'Success!!');
             return redirect()->route('book.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error!!');
+            Toastr::error('Something Went Wrong', 'Error!!');
             return back();
         }
     }
@@ -128,7 +161,7 @@ class BookController extends Controller
             Toastr::success('Book Deleted Successfully :)', 'Success!!');
             return redirect()->route('book.index');
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error!!');
+            Toastr::error('Something Went Wrong', 'Error!!');
             return back();
         }
     }
@@ -137,11 +170,9 @@ class BookController extends Controller
     {
         try {
             $book = Book::find($request->id);
-            if ($request->type == 'add')
-            {
+            if ($request->type == 'add') {
                 $book->stock += $request->quantity;
-            }
-            else{
+            } else {
                 $book->stock -= $request->quantity;
             }
             $book->save();
@@ -149,7 +180,7 @@ class BookController extends Controller
             Toastr::success('Stock Modified Successfully :)', 'Success!!');
             return back();
         } catch (\Exception $e) {
-            Toastr::error('Something Went Wrong','Error!!');
+            Toastr::error('Something Went Wrong', 'Error!!');
             return back();
         }
     }
