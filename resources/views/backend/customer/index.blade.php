@@ -1,11 +1,11 @@
 @extends('backend.master')
 @section('content')
     <div class="section-header">
-        <h1>Orders</h1>
+        <h1>Customers</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
             <div class="breadcrumb-item"><a
-                    href="{{ route('customer.index') }}">Order List</a></div>
+                    href="{{ route('customer.index') }}">Customer List</a></div>
         </div>
     </div>
     <div class="section-body">

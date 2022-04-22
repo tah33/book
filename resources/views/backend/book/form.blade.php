@@ -85,13 +85,6 @@
                                     <span class="text-danger"> {{ $errors->first('language') }} </span>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <label for="max_page">Max Page Allow For Read <strong class="text-danger">*</strong></label>
-                                    <input type="number" class="form-control" id="max_page" name="max_page"
-                                           placeholder="e.g.10"
-                                           value="{{ isset($book) ? $book->max_page : old('max_page') }}">
-                                    <span class="text-danger"> {{ $errors->first('max_page') }} </span>
-                                </div>
-                                <div class="form-group col-lg-4">
                                     <label for="image">Image</label>
                                     <input type="file" class="form-control" id="image" name="image">
                                 </div>

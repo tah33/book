@@ -31,9 +31,15 @@
                                 <tr>
                                     <th scope="row">{{ $key+1 }}</th>
                                     <td><a href="{{ route('order.show',$item->id) }}">{{ $item->invoice_no }}</a></td>
-                                    <td>{{ $item->user->name }}</td>
+                                    <td>{{ $item->user->email }}</td>
                                     <td>{{ $item->payment_type }}</td>
-                                    <td>{{ $item->payment_status }}</td>
+                                    <td>
+                                        @if($item->payment_status == 0)
+                                            <div class="badge badge-warning">Unpaid</div>
+                                        @else
+                                            <div class="badge badge-success">Paid</div>
+                                        @endif
+                                    </td>
                                     <td>{{ round(@$item->total_payable,2) }} ৳</td>
                                     <td>
                                         @if($item->delivery_status == 0)

@@ -68,7 +68,7 @@ Route::group(['middleware' => ['auth']], function () {
     //order status change
     Route::get('order-status-change/{id}', [OrderController::class, 'statusChange'])->name('status.change');
 
-    //order list
+    //return order list
     Route::get('return-order-list', [ReturnOrderController::class, 'index'])->name('return.index');
     //request return order
     Route::post('request-return', [ReturnOrderController::class, 'requestStore'])->name('request.return');
@@ -87,10 +87,49 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('customers', [\App\Http\Controllers\HomeController::class, 'customer'])->name('customer.index');
 });
 
+//all-books page
 Route::get('all-books', [HomeController::class, 'allBooks'])->name('all.books');
+
+//show book by category
 Route::get('category-books/{id}', [HomeController::class, 'categoryBooks'])->name('category.books');
+
+//books by author
 Route::get('author-books/{id}', [HomeController::class, 'authorBooks'])->name('author.books');
+
+//show details page of book
 Route::get('book-details/{id}', [HomeController::class, 'bookDetails'])->name('books.details');
+
+//search book
 Route::post('search-book', [HomeController::class, 'searchBook'])->name('search.book');
+
+//give feedback about book
+Route::post('review-store', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
+
+//cart-list
+Route::get('cart-list', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.lists');
+
+//add to cart
+Route::post('add-to-cart', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+
+//update cart
+Route::post('update-cart', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+
+//remove from cart
+Route::get('remove-from-cart/{id}', [\App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+
+//address page
+Route::get('address-page', [\App\Http\Controllers\OrderController::class, 'addressPage'])->name('address.page');
+
+//save address
+Route::post('save-address', [\App\Http\Controllers\OrderController::class, 'saveAddress'])->name('save.address');
+
+//address page
+Route::get('payment-page', [\App\Http\Controllers\OrderController::class, 'paymentPage'])->name('payment.page');
+
+//save address
+Route::post('save-address', [\App\Http\Controllers\OrderController::class, 'saveAddress'])->name('save.address');
+
+//save address
+Route::post('confirm-order', [\App\Http\Controllers\OrderController::class, 'confirmOrder'])->name('confirm.order');
 
 require __DIR__ . '/auth.php';

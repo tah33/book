@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/dataTables.dateTime.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
+    <link rel="shortcut icon" href="{{ asset($setting->favicon) }}"/>
     @stack('css')
 </head>
 <body>

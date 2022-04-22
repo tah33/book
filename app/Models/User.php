@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function billingAddress()
+    {
+        return $this->hasOne(BillingAddress::class);
+    }
 }

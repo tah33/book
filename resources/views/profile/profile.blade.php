@@ -15,7 +15,7 @@
                 <div class="card profile-widget">
                     <div class="profile-widget-header">
                         <img alt="image" src="{{ asset(auth()->user()->image) }}"
-                             class="rounded-circle profile-widget-picture">
+                             class="rounded-circle profile-widget-picture" width="200">
                         <h2 class="section-title">{{ Auth::user()->name }}</h2>
                         <p class="section-lead">
                             Change information about yourself on this page.

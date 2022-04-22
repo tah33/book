@@ -57,22 +57,6 @@ class BookController extends Controller
             $file_name = 'book-' . uniqid() . '.pdf';
             $request->pdf->move($path, $file_name);
 
-            $im = new imagick($request->pdf);
-            $pages = $im->getNumberImages();
-            if ($pages < 3) {
-                $resolution = 600;
-            } else {
-                $resolution = floor(sqrt(1000000 / $pages));
-            }
-            $imagick = new imagick();
-            $imagick->setResolution($resolution, $resolution);
-            $imagick->readImage($request->pdf);
-            $imagick->setImageFormat('jpg');
-            foreach ($imagick as $i => $imagi) {
-                $imagick->writeImage($request->pdf . " page " . ($i + 1) . " of " . $pages . ".jpg");
-            }
-            $imagick->clear();
-
             Book::create([
                 'title' => $request->title,
                 'price' => $request->price,
@@ -84,7 +68,7 @@ class BookController extends Controller
                 'publisher' => $request->publisher,
                 'country' => $request->country,
                 'language' => $request->language,
-                'max_page' => $request->max_page,
+                'max_page' => 0,
                 'demo_pdf' => $request->demo_pdf ?? null,
                 'pdf' => $path . '/' . $file_name,
             ]);
@@ -140,7 +124,7 @@ class BookController extends Controller
                 'publisher' => $request->publisher,
                 'country' => $request->country,
                 'language' => $request->language,
-                'max_page' => $request->max_page,
+                'max_page' => 0,
                 'demo_pdf' => $request->demo_pdf ?? null,
                 'pdf' => $path . '/' . $file_name,
             ]);

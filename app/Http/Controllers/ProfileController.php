@@ -49,6 +49,7 @@ class ProfileController extends Controller
         try {
             $user->name = $request->name;
             $user->username = $request->username;
+            $user->email = $request->email;
             $user->phone = $request->phone;
             $request->image = $this->saveImage('user-'.uniqid().'.png',$request->image,'uploads/image/',$user->image);
             $user->image = $request->image;

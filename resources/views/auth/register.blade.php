@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="{{ url('/') }}">
-                <img src="{{ asset($setting->logo) }}" alt="logo">
+                <img src="{{ asset($setting->logo) }}" alt="logo" width="200" height="200">
             </a>
         </x-slot>
 
@@ -25,6 +25,17 @@
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
+
+                <div>
+                    <x-label for="username" :value="__('Username')" />
+
+                    <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
+                </div>
+                <div>
+                    <x-label for="phone" :value="__('Phone')" />
+
+                    <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus />
+                </div>
 
             <!-- Password -->
             <div class="mt-4">

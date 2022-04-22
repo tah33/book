@@ -36,4 +36,9 @@ class Order extends Model
     {
         return $this->returnOrder()->where('is_reject',0)->where('status',1)->first();
     }
+
+    public function getReturnRequestedAttribute()
+    {
+        return $this->returnOrder()->where('is_reject',0)->where('status',0)->first();
+    }
 }

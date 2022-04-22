@@ -51,7 +51,7 @@
                                     <strong>Shipped To:</strong><br>
                                     {{ @$order->billingAddress->name }}<br>
                                     <a href="mailto:{{ @$order->billingAddress->email }}">{{ @$order->billingAddress->email }}</a><br>
-                                    <a href="tel:{{ @$order->billingAddress->email }}">{{ @$order->billingAddress->email }}</a>
+                                    <a href="tel:{{ @$order->billingAddress->email }}">{{ @$order->billingAddress->phone }}</a>
                                 </address>
                             </div>
                         </div>

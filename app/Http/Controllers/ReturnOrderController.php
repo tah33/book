@@ -29,6 +29,7 @@ class ReturnOrderController extends Controller
                 'order_id' => $request->order_id,
                 'reason' => $request->reason,
             ]);
+            Toastr::success('Request Send Successfully','Success !!');
             return back();
         } catch (\Exception $e) {
             Toastr::error('Something Went Wrong','Error!!');
@@ -40,6 +41,7 @@ class ReturnOrderController extends Controller
     {
         try {
             ReturnOrder::where('id',$id)->update(['is_reject' => 1]);
+            Toastr::success('Requested Rejected Successfully','Success !!');
             return back();
         } catch (\Exception $e) {
             Toastr::error('Something Went Wrong','Error!!');

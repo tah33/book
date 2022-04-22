@@ -36,7 +36,7 @@ class HomeController extends Controller
                     'total_categories' => Category::where('status',1)->count(),
                     'total_authors' => Author::where('status',1)->count(),
                     'total_customers' => User::where('status',1)->where('role_id',2)->count(),
-                    'total_books' => User::where('status',1)->where('role_id',2)->count(),
+                    'total_books' => Book::where('status',1)->count(),
                     'total_order' => Order::where('delivery_status',2)->count(),
                     'total_sales' => Order::where('delivery_status',2)->sum('total_payable'),
                     'total_return' => Order::where('delivery_status',2)->whereHas('returnOrder',function ($query){
@@ -46,9 +46,9 @@ class HomeController extends Controller
                 return view('backend.home',$data);
             } elseif (auth()->user()->role_id == 2) {
                 $data = [
-                    'setting' => Setting::first()
+                    'orders' => Order::latest()->where('user_id',auth()->id())->get()
                 ];
-                return view('frontend.home',$data);
+                return view('frontend.user',$data);
             }
             return redirect()->route('home');
         } catch (\Exception $e) {
@@ -63,6 +63,7 @@ class HomeController extends Controller
             DB::table($table)->where('id',$id)->update([
                 'status' => 1
             ]);
+            Toastr::success('Status Updated Successfully','Success !!');
             return back();
         } catch (\Exception $e) {
             Toastr::error('Something Went Wrong','error');

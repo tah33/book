@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Setting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,10 +28,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-
-            // following code will create $posts variable which we can use
-            // in our post.list view you can also create more variables if needed
             $view->with('setting', Setting::first());
+        });
+        View::composer('frontend.header', function ($view) {
+            $view->with('carts', Cart::where('user_id',auth()->id())->get());
+            $view->with('sidebar_categories', Category::where('status',1)->get());
         });
     }
 }

@@ -21,8 +21,8 @@
             <li class="{{ request()->is('order-list') ? 'active' : '' }}"><a class="nav-link" href="{{ route('order.index') }}"><i class="fa fa-book"></i> <span>Order</span></a></li>
             <li class="menu-header">Return Order</li>
             <li class="{{ request()->is('return-order-list') ? 'active' : '' }}"><a class="nav-link" href="{{ route('return.index') }}"><i class="fa fa-backward"></i> <span>Return Order</span></a></li>
-            <li class="menu-header">Report</li>
-            <li class="{{ request()->is('sales-report') ? 'active' : '' }}"><a class="nav-link" href="{{ route('sales.report') }}"><i class="fa fa-cog"></i> <span>Sales Report</span></a></li>
+            {{--<li class="menu-header">Report</li>
+            <li class="{{ request()->is('sales-report') ? 'active' : '' }}"><a class="nav-link" href="{{ route('sales.report') }}"><i class="fa fa-cog"></i> <span>Sales Report</span></a></li>--}}
             <li class="menu-header">Settings</li>
             <li class="{{ request()->is('settings') ? 'active' : '' }}"><a class="nav-link" href="{{ route('settings') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
 
