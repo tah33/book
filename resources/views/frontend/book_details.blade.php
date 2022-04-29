@@ -47,12 +47,15 @@
                                     <div class="d-flex">
                                         <a href="#" class="cart_btn mr-3" data-toggle="modal" data-target="#pdf_file">Read
                                             Book</a>
-                                        @if(auth()->check())
+                                        @if(auth()->check() && $book->stack > 0)
                                             <form action="{{ route('cart.store') }}" method="POST">@csrf
                                                 <input type="hidden" name="book_id" value="{{ $book->id }}">
                                                 <input type="hidden" name="price" value="{{ $book->price }}">
                                                 <button type="submit" class="cart_btn mr-3">Add To Cart</button>
                                             </form>
+                                        @endif
+                                        @if($book->stack == 0 && auth()->user()->role_id == 2 && !$stock_request)
+                                            <a href="{{ route('stock.request',$book->id) }}" class="cart_btn mr-3">Request For ReStock</a>
                                         @endif
                                     </div>
                                 </td>

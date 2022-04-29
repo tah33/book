@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -106,30 +107,33 @@ Route::post('search-book', [HomeController::class, 'searchBook'])->name('search.
 Route::post('review-store', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
 
 //cart-list
-Route::get('cart-list', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.lists');
+Route::get('cart-list', [CartController::class, 'index'])->name('cart.lists');
 
 //add to cart
-Route::post('add-to-cart', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+Route::post('add-to-cart', [CartController::class, 'store'])->name('cart.store');
 
 //update cart
-Route::post('update-cart', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+Route::post('update-cart', [CartController::class, 'update'])->name('cart.update');
 
 //remove from cart
-Route::get('remove-from-cart/{id}', [\App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::get('remove-from-cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 //address page
-Route::get('address-page', [\App\Http\Controllers\OrderController::class, 'addressPage'])->name('address.page');
+Route::get('address-page', [OrderController::class, 'addressPage'])->name('address.page');
 
 //save address
-Route::post('save-address', [\App\Http\Controllers\OrderController::class, 'saveAddress'])->name('save.address');
+Route::post('save-address', [OrderController::class, 'saveAddress'])->name('save.address');
 
 //address page
-Route::get('payment-page', [\App\Http\Controllers\OrderController::class, 'paymentPage'])->name('payment.page');
+Route::get('payment-page', [OrderController::class, 'paymentPage'])->name('payment.page');
 
 //save address
-Route::post('save-address', [\App\Http\Controllers\OrderController::class, 'saveAddress'])->name('save.address');
+Route::post('save-address', [OrderController::class, 'saveAddress'])->name('save.address');
 
 //save address
-Route::post('confirm-order', [\App\Http\Controllers\OrderController::class, 'confirmOrder'])->name('confirm.order');
+Route::post('confirm-order', [OrderController::class, 'confirmOrder'])->name('confirm.order');
+
+//stock request
+Route::get('stock-request/{id}', [BookController::class, 'stockRequest'])->name('stock.request');
 
 require __DIR__ . '/auth.php';

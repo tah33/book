@@ -106,5 +106,32 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>ReStock Requests</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Book</th>
+                            <th scope="col">User</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($stock_requests as $key=> $item)
+                            <tr>
+                                <th scope="row">{{ $key+1 }}</th>
+                                <td>{{ $item->book->title }}</td>
+                                <td>{{ $item->user->name }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

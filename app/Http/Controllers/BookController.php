@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\StockRequest;
 use App\Traits\ImageStore;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -70,7 +71,7 @@ class BookController extends Controller
                 'language' => $request->language,
                 'max_page' => 0,
                 'demo_pdf' => $request->demo_pdf ?? null,
-                'pdf' => $path . '/' . $file_name,
+                'pdf' => '/'.$path . $file_name,
             ]);
             Toastr::success('Book Created Successfully :)', 'Success!!');
             return redirect()->route('book.index');
@@ -126,7 +127,7 @@ class BookController extends Controller
                 'language' => $request->language,
                 'max_page' => 0,
                 'demo_pdf' => $request->demo_pdf ?? null,
-                'pdf' => $path . '/' . $file_name,
+                'pdf' => '/'.$path . $file_name,
             ]);
             Toastr::success('Book Updated Successfully :)', 'Success!!');
             return redirect()->route('book.index');
@@ -156,6 +157,7 @@ class BookController extends Controller
             $book = Book::find($request->id);
             if ($request->type == 'add') {
                 $book->stock += $request->quantity;
+                StockRequest::where('book_id',$request->id)->delete();
             } else {
                 $book->stock -= $request->quantity;
             }
@@ -167,5 +169,16 @@ class BookController extends Controller
             Toastr::error('Something Went Wrong', 'Error!!');
             return back();
         }
+    }
+
+    public function stockRequest($id)
+    {
+        StockRequest::create([
+            'user_id' => auth()->id(),
+            'book_id' => $id,
+        ]);
+
+        Toastr::success('Stock Requested Successfully :)', 'Success!!');
+        return back();
     }
 }

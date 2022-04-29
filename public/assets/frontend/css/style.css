@@ -171,3 +171,7 @@ body{
     cursor: pointer;
     border : none
 }
+.out_of_stock{
+    position: absolute;
+    right: 0;
+}

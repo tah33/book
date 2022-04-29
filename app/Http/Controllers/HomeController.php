@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Setting;
+use App\Models\StockRequest;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class HomeController extends Controller
         try {
             if (auth()->user()->role_id == 1) {
                 $data = [
+                    'stock_requests' => StockRequest::get(),
                     'total_categories' => Category::where('status',1)->count(),
                     'total_authors' => Author::where('status',1)->count(),
                     'total_customers' => User::where('status',1)->where('role_id',2)->count(),
@@ -128,7 +130,8 @@ class HomeController extends Controller
     public function bookDetails($id)
     {
         $data = [
-            'book' => Book::find($id)
+            'book' => Book::find($id),
+            'stock_request' => StockRequest::where('user_id',auth()->id())->where('book_id',$id)->first(),
         ];
         return view('frontend.book_details',$data);
     }

@@ -13,6 +13,9 @@
                                 <img class="card-img-top" height="250"
                                      src="{{ asset($book->image) }}"
                                      alt="Card image cap">
+                                @if($book->stock == 0)
+                                    <span class="badge badge-danger out_of_stock">Out Of Stock</span>
+                                @endif
                             </a>
                             <div class="card-body text-left">
                                 <h5 class="card-title"><a href="{{ route('books.details',$book->id) }}">{{ $book->title }}</a></h5>

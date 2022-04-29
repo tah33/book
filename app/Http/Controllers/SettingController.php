@@ -39,14 +39,20 @@ class SettingController extends Controller
 
             $setting = Setting::first();
 
-            $setting->update([
-                'delivery_charge' => $request->delivery_charge,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'logo' => $logo,
-                'favicon' => $favicon,
-            ]);
+            $setting->delivery_charge = $request->delivery_charge;
+            $setting->email = $request->email;
+            $setting->phone = $request->phone;
+            $setting->address = $request->address;
+            if ($request->logo)
+            {
+                $setting->logo = $logo;
+            }
+            if ($request->favicon)
+            {
+                $setting->favicon = $favicon;
+            }
+
+            $setting->save();
 
             Toastr::success('Setting Updated Successfully :)', 'Success!!');
             return back();
